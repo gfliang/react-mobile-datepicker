@@ -17,11 +17,12 @@
     "calendar"
   ],
   "scripts": {
+    "prepare": "npm run build",
     "clean": "rm -rf dist/",
     "build": "npm-run-all clean transpile minify size",
-    "transpile": "rollup -c rollup.config.js -m ${npm_package_main}.map -f umd -n $npm_package_amdName -o $npm_package_main",
-    "minify": "uglifyjs $npm_package_main -cm -o $npm_package_minified_main --source-map \"root='${npm_package_main}.map',url='${npm_package_minified_main}.map'\"",
-    "size": "size=$(gzip-size $npm_package_minified_main) && echo \"gzip size: $size\"",
+    "transpile": "rollup -c rollup.config.js",
+    "minify": "uglifyjs ./dist/react-mobile-datepicker.js -cm -o dist/react-mobile-datepicker.min.js --source-map \"root='./dist/react-mobile-datepicker.js.map',url='react-mobile-datepicker.min.js.map'\"",
+    "size": "size=$(gzip-size dist/react-mobile-datepicker.min.js) && echo \"gzip size: $size\"",
     "start": "webpack-dev-server",
     "mocha": "./node_modules/.bin/mocha --compilers js:babel-core/register --require ./test/helper.js --recursive",
     "test": "./node_modules/.bin/nyc npm run mocha",

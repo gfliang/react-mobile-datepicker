@@ -8,11 +8,18 @@ var babelRc = JSON.parse(fs.readFileSync('.babelrc','utf8')); // eslint-disable-
 
 export default {
     input: './lib/index.js',
-    exports: 'default',
-    globals: {
-        'react': 'React',
-        'react-dom': 'ReactDOM'
+    output: {
+        file: './dist/react-mobile-datepicker.js',
+        format: 'umd',
+        name: 'reactMobileDatePicker',
+        sourcemap: true,
+        exports: 'default',
+        globals: {
+            'react': 'React',
+            'react-dom': 'ReactDOM'
+        }
     },
+    external: ['react', 'react-dom'],
     plugins: [
         postcss({
             plugins: [
@@ -35,5 +42,5 @@ export default {
             plugins: babelRc.plugins,
             exclude: 'node_modules/**',
         }),
-    ],
+    ]
 };
